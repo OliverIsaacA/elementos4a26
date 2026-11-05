@@ -12,15 +12,6 @@ class Screen3 extends StatelessWidget {
     'Dobbie': 'assets/imgs/pijamadogo.jpg',
   };
 
-  final dogs = const[
-    'Ginger',
-    'KC',
-    'Blackie',
-    'Nicky',
-    'John Wick',
-    'Dobbie',
-  ];
-
   final cats = const[
     'Moji',
     'Moka',
@@ -36,16 +27,15 @@ class Screen3 extends StatelessWidget {
       appBar: AppBar(title: Text('Ventana 3'),),
       body: ListView(
         children: [
-          ...dogs.map((dog)=>ListTile(
-            leading: Icon(Icons.pets_rounded),
-            title: Text(dog),
-            subtitle: Text('Un perro maravilloso'),
-            trailing: Icon(Icons.arrow_forward),
-            tileColor: Color.fromARGB(218, 149, 209, 254),
-            iconColor: Color.fromARGB(255, 77, 80, 255),
-            
-          )
-          ),
+          ...perros.entries.map((perro){
+            return _tileDog(
+              perro.key, 
+              perro.value, 
+              Colors.blueAccent, 
+              Colors.amberAccent, 
+              Colors.white
+            );
+          }),
           Divider(),
           ...cats.map((cat)=>ListTile(
             leading: Icon(Icons.pets_rounded),
@@ -78,5 +68,7 @@ class Screen3 extends StatelessWidget {
             iconColor: iconColor,
             textColor: textColor,
     );
+    final espacio = SizedBox(height: 10);
+    return Column(children: [tile, espacio]);
   }
 }
