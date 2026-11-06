@@ -12,14 +12,13 @@ class Screen3 extends StatelessWidget {
     'Dobbie': 'assets/imgs/pijamadogo.jpg',
   };
 
-  final cats = const[
-    'Moji',
-    'Moka',
-    'Felix',
-    'Sisu',
-    'Pikachu',
-    'Frenchie',
-  ];
+  final Map<String, String> gatos = const {
+    'Moji': 'assets/imgs/gato_chistoso.jpg',
+    'Moka': 'assets/imgs/gato_chistoso_2.jpg',
+    'Felix': 'assets/imgs/gato_chistoso_3.jpg',
+    'Sisu': 'assets/imgs/gato_chistoso_4.jpg',
+    'Pikachu': 'assets/imgs/gato_chistoso_5.jpg',
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -37,16 +36,15 @@ class Screen3 extends StatelessWidget {
             );
           }),
           Divider(),
-          ...cats.map((cat)=>ListTile(
-            leading: Icon(Icons.pets_rounded),
-            title: Text(cat),
-            subtitle: Text('Gatito complicado'),
-            trailing: Icon(Icons.arrow_forward),
-            tileColor: Color.fromARGB(218, 254, 250, 149),
-            iconColor: Color.fromARGB(255, 255, 157, 77),
-            
-          )
-          ),
+          ...gatos.entries.map((gato){
+            return _tileCat(
+              gato.key, 
+              gato.value, 
+              const Color.fromARGB(255, 255, 157, 10), 
+              const Color.fromARGB(255, 118, 22, 235), 
+              Colors.white
+            );
+          }),
       ],
       ),
     );
@@ -67,8 +65,30 @@ class Screen3 extends StatelessWidget {
             tileColor: tileColor,
             iconColor: iconColor,
             textColor: textColor,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
     );
     final espacio = SizedBox(height: 10);
     return Column(children: [tile, espacio]);
   }
 }
+
+  Widget _tileCat(
+    String catName,
+    String catImage,
+    Color tileColor,
+    Color iconColor,
+    Color textColor
+  ){
+    final tile = ListTile(
+            title: Image.asset(catImage, width: 50, height: 50),
+            leading: Icon(Icons.pets_rounded),
+            subtitle: Text('Un gato dormilón'),
+            trailing: Icon(Icons.arrow_forward),
+            tileColor: tileColor,
+            iconColor: iconColor,
+            textColor: textColor,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+    );
+    final espacio = SizedBox(height: 10);
+    return Column(children: [tile, espacio]);
+  }
