@@ -82,7 +82,7 @@ class Screen3 extends StatelessWidget {
     final tile = ListTile(
             title: Image.asset(catImage, width: 50, height: 50),
             leading: Icon(Icons.pets_rounded),
-            subtitle: Text('Un gato dormilón'),
+            subtitle: Text(catName),
             trailing: Icon(Icons.arrow_forward),
             tileColor: tileColor,
             iconColor: iconColor,
