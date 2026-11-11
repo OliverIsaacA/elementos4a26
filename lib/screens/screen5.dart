@@ -8,6 +8,10 @@ class Screen5 extends StatefulWidget {
 }
 
 class _ScreenState extends State<Screen5> {
+  // Variables para almacenar los valores de entradas
+  bool _switchValue = false;
+  double _sliderValue = 0.0;
+  TextEditingController _textController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,6 +22,8 @@ class _ScreenState extends State<Screen5> {
           Text('Entradas de datos'),
           // Llamadas a los widgets de entradas de datos
           _entradaTexto(),
+          _entradaSwitch(), 
+          _entradaSlider(),
         ],
       ),
     );
@@ -25,11 +31,56 @@ class _ScreenState extends State<Screen5> {
 
   TextField _entradaTexto() {
     return TextField(
+      controller: _textController,
       decoration: InputDecoration(
         labelText: 'Nombre',
         hintText: 'Ingresa tu nombre',
         border: OutlineInputBorder(),
       ),
+      onChanged: (value) {
+        print('Valor del TextField: $value');
+      },
+    );
+  }
+
+  Row _entradaSwitch() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Text('¿Te gusta Flutter?'),
+        Switch(
+          value: _switchValue,
+          onChanged: (value) {
+            setState((){
+              _switchValue = value;
+              print('El valor del Switch es: $_switchValue');
+            });
+          }
+        ),
+      ],
+    );
+  }
+
+  Column _entradaSlider() {
+    return Column(
+      children: [
+        Text('Indica qué tanto te gusta Flutter:'),
+        Slider(
+          min: 0.0, 
+          max: 10.0,
+          activeColor: Colors.blueAccent,
+          thumbColor: Colors.purpleAccent,
+          value: _sliderValue,
+          divisions: 10,
+          label: '${_sliderValue.round()}',
+          onChanged: (value){
+            setState(() {
+              _sliderValue = value;
+              print('El valor del Slider es: $_sliderValue');
+            });
+          },
+        ),
+      ],
     );
   }
 
