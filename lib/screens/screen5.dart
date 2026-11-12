@@ -12,6 +12,8 @@ class _ScreenState extends State<Screen5> {
   bool _switchValue = false;
   double _sliderValue = 0.0;
   TextEditingController _textController = TextEditingController();
+  int radioSelected = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,6 +26,7 @@ class _ScreenState extends State<Screen5> {
           _entradaTexto(),
           _entradaSwitch(), 
           _entradaSlider(),
+          _entradaRadio(),
         ],
       ),
     );
@@ -32,10 +35,14 @@ class _ScreenState extends State<Screen5> {
   TextField _entradaTexto() {
     return TextField(
       controller: _textController,
+      obscureText: false,
+      obscuringCharacter: '*',
+      maxLength: 120,
+      maxLines: 3,
       decoration: InputDecoration(
         labelText: 'Nombre',
         hintText: 'Ingresa tu nombre',
-        border: OutlineInputBorder(),
+        border: UnderlineInputBorder(),
       ),
       onChanged: (value) {
         print('Valor del TextField: $value');
@@ -84,4 +91,66 @@ class _ScreenState extends State<Screen5> {
     );
   }
 
+  Column _entradaRadio(){
+    final ListTile kotlin = ListTile(
+      title: const Text('Kotlin'),
+      leading: Transform.scale(
+        scale: 1.5,
+        child: Radio(
+          value: 1,
+          groupValue: radioSelected,
+          onChanged:( value ){
+            setState(() {
+              radioSelected = value!;
+              print('Selección del botón radio: $radioSelected');
+            });
+          },
+        ),
+      ),
+    );
+
+    final ListTile flutter = ListTile(
+      title: const Text('Flutter'),
+      leading: Transform.scale(
+        scale: 1.5,
+        child: Radio(
+          value: 2,
+          groupValue: radioSelected,
+          onChanged:( value ){
+            setState(() {
+              radioSelected = value!;
+              print('Selección del botón radio: $radioSelected');
+            });
+          },
+        ),
+      ),
+    );
+
+    final ListTile reactNative = ListTile(
+      title: const Text('React Native'),
+      leading: Transform.scale(
+        scale: 1.5,
+        child: Radio(
+          value: 3,
+          groupValue: radioSelected,
+          onChanged:( value ){
+            setState(() {
+              radioSelected = value!;
+              print('Selección del botón radio: $radioSelected');
+            });
+          },
+        ),
+      ),
+    );
+
+    return Column(
+      children: [
+        Text('¿Qué prefieres para desarrollo móvil?'),
+        kotlin,
+        flutter,
+        reactNative,
+      ],
+    );
+
+  }
 }
