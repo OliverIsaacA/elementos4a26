@@ -9,7 +9,7 @@ class Screen2 extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Pantalla 2',
         style: TextStyle(color: Colors.white)),
-        backgroundColor: Colors.cyanAccent,
+        backgroundColor: const Color.fromARGB(255, 251, 170, 255),
       ),
       body: Center(
         child: Row(
